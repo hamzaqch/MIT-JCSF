@@ -1,7 +1,6 @@
 package info.utils;
 
 import info.pom.AbstractPage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -198,5 +197,77 @@ public class AssertionMethods extends AbstractPage {
 
 		}
 	}
+	
+	/**
+	 * Method to check if element is selcted
+	 * 
+	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String : Locator value
+	 * @return boolean
+	 */
+	private boolean isElementSelected(String accessType, String accessName) {
+		return getDriverWait()
+				.waitShort()
+				.until(ExpectedConditions.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessName)))
+				.isSelected();
+	}
+	
+	/**
+	 * Method to assert checkbox check/uncheck
+	 * 
+	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String : Locator value
+	 * @param testCase    : Boolean : test case [true or false]
+	 */
+	public void isCheckboxChecked(String accessType, String accessName, boolean testCase) throws TestCaseFailed {
+		if (testCase && !isElementSelected(accessType, accessName)) {
+			throw new TestCaseFailed("Radio Button not selected");
+		}
+		else if (!testCase && isElementSelected(accessType, accessName)) {
+			throw new TestCaseFailed("Radio Button is selected");
+		}
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
