@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import info.config.*;
 
@@ -14,6 +15,7 @@ public class AssertionMethods extends AbstractPage {
 	private final SelectElementByType selectElementByType = new SelectElementByType();
 
 	private WebElement element = null;
+	private Select selectList = null;
 
 	/**
 	 * Method to get page title
@@ -200,7 +202,7 @@ public class AssertionMethods extends AbstractPage {
 
 		}
 	}
-	
+
 	/**
 	 * Method to check if element is selcted
 	 * 
@@ -209,12 +211,12 @@ public class AssertionMethods extends AbstractPage {
 	 * @return boolean
 	 */
 	private boolean isElementSelected(String accessType, String accessName) {
-		return getDriverWait()
-				.waitShort()
-				.until(ExpectedConditions.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessName)))
+		return getDriverWait().waitShort()
+				.until(ExpectedConditions
+						.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessName)))
 				.isSelected();
 	}
-	
+
 	/**
 	 * Method to assert checkbox check/uncheck
 	 * 
@@ -225,12 +227,11 @@ public class AssertionMethods extends AbstractPage {
 	public void isCheckboxChecked(String accessType, String accessName, boolean testCase) throws TestCaseFailed {
 		if (testCase && !isElementSelected(accessType, accessName)) {
 			throw new TestCaseFailed("Radio Button not selected");
-		}
-		else if (!testCase && isElementSelected(accessType, accessName)) {
+		} else if (!testCase && isElementSelected(accessType, accessName)) {
 			throw new TestCaseFailed("Radio Button is selected");
 		}
-			}
-	
+	}
+
 	/**
 	 * Method to assert radio button selected/unselected
 	 * 
@@ -241,54 +242,92 @@ public class AssertionMethods extends AbstractPage {
 	public void isRadioButtonSelected(String accessType, String accessName, boolean testCase) throws TestCaseFailed {
 		if (testCase && !isElementSelected(accessType, accessName)) {
 			throw new TestCaseFailed("Radio Button not selected");
-		}
-		else if (!testCase && isElementSelected(accessType, accessName)) {
+		} else if (!testCase && isElementSelected(accessType, accessName)) {
 			throw new TestCaseFailed("Radio Button is selected");
 		}
-			}
-	
+	}
+
 	/**
 	 * Method to assert option from radio button group is selected/unselected
 	 * 
-	 * @param accessType  : String  : Locator type (id, name, class, xpath, css)
-	 * @param accessValue : String  : Locator value
-	 * @param byOption	  : String  : Option By (Value, visible text, index)
-	 * @param option	  : String  : Value of byOption
+	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String : Locator value
+	 * @param byOption    : String : Option By (Value, visible text, index)
+	 * @param optionValue : String : Value of byOption
 	 * @param testCase    : Boolean : test case [true or false]
 	 */
-	public void isOptionFromRadioButtonGroupSelected(String accessType, String accessName, String byOption, String option, boolean testCase) throws TestCaseFailed {
-		List<WebElement> element = getDriverWait()
-				.waitShort().until(ExpectedConditions.presenceOfAllElementsLocatedBy(selectElementByType.getElementByType(accessType, accessName)));
-		for (int i = 0; i<element.size(); i++) {
-			if (byOption.equals("value") && element.get(i).getAttribute("value").equals(option)) {
-				if (testCase && !element.get(i).isSelected()) {
+	public void isOptionFromRadioButtonGroupSelected(String accessType, String accessName, String byOption,
+			String optionValue, boolean testCase) throws TestCaseFailed {
+		List<WebElement> elements = getDriverWait().waitShort().until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(selectElementByType.getElementByType(accessType, accessName)));
+		for (int i = 0; i < elements.size(); i++) {
+			if (byOption.equals("value") && elements.get(i).getAttribute("value").equals(optionValue)) {
+				if (testCase && !elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button not selected");
-				}
-				else if (!testCase && element.get(i).isSelected()) {
+				} else if (!testCase && elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button is selected");
 				}
-			}
-			else if (element.get(i).getText().equals(option)) {
-				if (testCase && !element.get(i).isSelected()) {
+			} else if (elements.get(i).getText().equals(optionValue)) {
+				if (testCase && !elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button not selected");
-				}
-				else if (!testCase && element.get(i).isSelected()) {
+				} else if (!testCase && elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button is selected");
 				}
 			}
 		}
 	}
+
+	/**
+	 * Method to verify if the particular option is Selected from Dropdown
+	 * 
+	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String : Locator value
+	 * @param byOption    : String : Option By (Value, visible text, index)
+	 * @param optionValue : String : Value of byOption
+	 * @param testCase    : Boolean : test case [true or false]
+	 */
+	public void isOptionFromDropdownSelected(String accessType, String accessName, String byOption, String optionValue,
+			boolean testCase) throws TestCaseFailed {
+		element = getDriverWait().waitShort().until(ExpectedConditions
+				.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessName)));
+		selectList = new Select(element);
+		String actualValue = "";
+		if (byOption.equals("text")) {
+			actualValue = selectList.getFirstSelectedOption().getText();
+		} else {
+			actualValue = selectList.getFirstSelectedOption().getAttribute("value");
+		}
+
+		if ((!actualValue.equals(optionValue)) && (testCase)) {
+			throw new TestCaseFailed("Option Not Selected From Dropwdown");
+		} else if ((actualValue.equals(optionValue)) && (!testCase)) {
+			throw new TestCaseFailed("Option Selected From Dropwdown");
+		}
+	}
 	
+	/**
+	 * method to get javascript pop-up alert text
+	 * 
+	 * @return String
+	 */
+	public String getAlertText() {
+		return getDriver().switchTo().alert().getText();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Method to check javascript pop-up alert text
+	 * 
+	 * @param alertText : String  : Text to verify in Alert
+	 * @param testCase  : Boolean : test case [true or false]
+	 */
+	public void checkAlertText(String alertText, boolean testCase) throws TestCaseFailed {
+		if (testCase && !getAlertText().equals(alertText)) {
+			throw new TestCaseFailed("Text on alert pop up not matched");
+		}
+		else if (!testCase && getAlertText().equals(alertText)) {
+			throw new TestCaseFailed("Text on alert pop up matched");
+		}
+	}
 	
 	
 	
