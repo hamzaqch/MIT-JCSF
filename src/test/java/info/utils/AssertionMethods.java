@@ -267,12 +267,14 @@ public class AssertionMethods extends AbstractPage {
 				} else if (!testCase && elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button is selected");
 				}
+				break;
 			} else if (elements.get(i).getText().equals(optionValue)) {
 				if (testCase && !elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button not selected");
 				} else if (!testCase && elements.get(i).isSelected()) {
 					throw new TestCaseFailed("Radio Button is selected");
 				}
+				break;
 			}
 		}
 	}

@@ -56,6 +56,27 @@ public class InputMethods extends AbstractPage {
 		else if (optionBy.equals("text"))
 			select_list.selectByVisibleText(option);
 	}
+	
+	/**
+	 * Method to select element from Dropdown Generic
+	 * 
+	 * @param <T>         : Generic : Can accept String or Integer
+	 * @param select_list : Select  : Select variable
+	 * @param arg 		  : String  : Option value (index, value or Visible text)
+	 */
+	public <T> void genericSelectElementFromDropDownByType(Select select_list, T arg) {
+		if (arg != null && arg instanceof String) {
+			if (arg.equals("value")) {
+				select_list.selectByValue((String) arg);
+			}
+			else {
+				select_list.selectByVisibleText((String) arg);
+			}
+		}
+		else {
+			select_list.selectByIndex((Integer) arg - 1);
+		}
+	}
 
 	/**
 	 * Method to unselect option from dropdwon list
@@ -123,7 +144,7 @@ public class InputMethods extends AbstractPage {
 	 * Method to toggle check-box status
 	 * 
 	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
-     * @param accessValue : String : Locator value
+     * @param accessValu)e : String : Locator value
 	 */
 	public void toggleCheckbox(String accessType, String accessValue) {
 		getDriverWait().waitShort().until(ExpectedConditions
