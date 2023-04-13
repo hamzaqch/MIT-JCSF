@@ -1,6 +1,9 @@
 package info.utils;
 
 import info.pom.AbstractPage;
+
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -227,6 +230,56 @@ public class AssertionMethods extends AbstractPage {
 			throw new TestCaseFailed("Radio Button is selected");
 		}
 			}
+	
+	/**
+	 * Method to assert radio button selected/unselected
+	 * 
+	 * @param accessType  : String : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String : Locator value
+	 * @param testCase    : Boolean : test case [true or false]
+	 */
+	public void isRadioButtonSelected(String accessType, String accessName, boolean testCase) throws TestCaseFailed {
+		if (testCase && !isElementSelected(accessType, accessName)) {
+			throw new TestCaseFailed("Radio Button not selected");
+		}
+		else if (!testCase && isElementSelected(accessType, accessName)) {
+			throw new TestCaseFailed("Radio Button is selected");
+		}
+			}
+	
+	/**
+	 * Method to assert option from radio button group is selected/unselected
+	 * 
+	 * @param accessType  : String  : Locator type (id, name, class, xpath, css)
+	 * @param accessValue : String  : Locator value
+	 * @param byOption	  : String  : Option By (Value, visible text, index)
+	 * @param option	  : String  : Value of byOption
+	 * @param testCase    : Boolean : test case [true or false]
+	 */
+	public void isOptionFromRadioButtonGroupSelected(String accessType, String accessName, String byOption, String option, boolean testCase) throws TestCaseFailed {
+		List<WebElement> element = getDriverWait()
+				.waitShort().until(ExpectedConditions.presenceOfAllElementsLocatedBy(selectElementByType.getElementByType(accessType, accessName)));
+		for (int i = 0; i<element.size(); i++) {
+			if (byOption.equals("value") && element.get(i).getAttribute("value").equals(option)) {
+				if (testCase && !element.get(i).isSelected()) {
+					throw new TestCaseFailed("Radio Button not selected");
+				}
+				else if (!testCase && element.get(i).isSelected()) {
+					throw new TestCaseFailed("Radio Button is selected");
+				}
+			}
+			else if (element.get(i).getText().equals(option)) {
+				if (testCase && !element.get(i).isSelected()) {
+					throw new TestCaseFailed("Radio Button not selected");
+				}
+				else if (!testCase && element.get(i).isSelected()) {
+					throw new TestCaseFailed("Radio Button is selected");
+				}
+			}
+		}
+	}
+	
+	
 	
 	
 	
