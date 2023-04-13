@@ -9,9 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import info.pom.AbstractPage;
 import info.config.*;
 
-public class InputMethods extends AbstractPage {
+public class InputMethods extends AbstractPage implements Base {
 
-	private final SelectElementByType selectElementByType = new SelectElementByType();
 	private WebElement dropdown, checkbox = null;
 	private Select selectList = null;
 
@@ -64,18 +63,28 @@ public class InputMethods extends AbstractPage {
 	 * @param select_list : Select  : Select variable
 	 * @param arg 		  : String  : Option value (index, value or Visible text)
 	 */
-	public <T> void genericSelectElementFromDropDownByType(Select select_list, T arg) {
-		if (arg != null && arg instanceof String) {
-			if (arg.equals("value")) {
-				select_list.selectByValue((String) arg);
-			}
-			else {
-				select_list.selectByVisibleText((String) arg);
-			}
-		}
-		else {
-			select_list.selectByIndex((Integer) arg - 1);
-		}
+	public <T extends Comparable<T>> void genericSelectElementFromDropDownByType(Select select_list, T arg) {
+	    if (arg != null) {
+	        if (arg instanceof String) {
+	            String argStr = (String) arg;
+	            if (argStr.equals("value")) {
+	                select_list.selectByValue(argStr);
+	            } else {
+	                select_list.selectByVisibleText(argStr);
+	            }
+	        } else if (arg instanceof Integer) {
+	            int argInt = (Integer) arg;
+	            if (argInt > 0) {
+	                select_list.selectByIndex(argInt - 1);
+	            } else {
+	                throw new IllegalArgumentException("Index must be a positive integer");
+	            }
+	        } else {
+	            throw new IllegalArgumentException("Argument type not supported");
+	        }
+	    } else {
+	        throw new NullPointerException("Argument cannot be null");
+	    }
 	}
 
 	/**

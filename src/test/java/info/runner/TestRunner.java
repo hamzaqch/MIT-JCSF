@@ -6,11 +6,12 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"features/TestCase_v1.feature"},
-                 glue = {"info.steps"},
+@CucumberOptions(
                  dryRun = false,
                  monochrome = true,
-                 plugin = {"pretty", "html:test-output.html"}
+                 plugin = {"pretty", "html:test-output.html", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"},
+                 glue = {"info.steps"},
+                 features = {"features/TestCase_v1.feature"}
                 )
 
 public class TestRunner {

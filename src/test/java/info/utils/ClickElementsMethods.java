@@ -8,10 +8,8 @@ import info.config.*;
 
 import info.pom.AbstractPage;
 
-public class ClickElementsMethods extends AbstractPage {
+public class ClickElementsMethods extends AbstractPage implements Base {
 
-	private final SelectElementByType selectElementByType = new SelectElementByType();
-	
 	private WebElement element = null;
 	
 	public void click(String accessType, String accessName) {

@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import info.config.*;
 
-public class AssertionMethods extends AbstractPage {
-
-	private final SelectElementByType selectElementByType = new SelectElementByType();
+public class AssertionMethods extends AbstractPage implements Base {
 
 	private WebElement element = null;
 	private Select selectList = null;
