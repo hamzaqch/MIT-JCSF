@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import info.config.*;
 
-public abstract class AbstractPage {
+public abstract class AbstractPage implements Base{
 
 	private final DriverManager driverManager = new DriverManager();
 	private final DriverWait driverWait = new DriverWait(driverManager);
