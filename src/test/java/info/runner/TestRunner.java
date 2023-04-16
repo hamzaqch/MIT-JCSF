@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
                  dryRun = false,
                  monochrome = true,
                  plugin = {"pretty", "html:test-output.html", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"},
-                 glue = {"info.steps"},
+                 glue = {"info.steps","info.steps.common"},
                  features = {"features/TestCase_v1.feature"}
                 )
 
