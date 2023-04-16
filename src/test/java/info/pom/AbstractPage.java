@@ -22,5 +22,9 @@ public abstract class AbstractPage implements Base{
 	public DriverWait getDriverWait() {
 		return driverWait;
 	}
+	
+	public void wait(String time) throws InterruptedException {
+		Thread.sleep(Integer.parseInt(time));
+	}
 
 }
