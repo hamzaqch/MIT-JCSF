@@ -1,4 +1,4 @@
-package info.steps;
+package info.steps.common;
 
 import info.pom.AbstractPage;
 import io.cucumber.java.en.Then;

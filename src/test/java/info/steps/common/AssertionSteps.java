@@ -1,4 +1,4 @@
-package info.steps;
+package info.steps.common;
 
 import info.config.TestCaseFailed;
 import info.pom.AbstractPage;
