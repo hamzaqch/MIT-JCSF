@@ -27,11 +27,11 @@ public class InputSteps extends AbstractPage {
 	 * Step to select option by text/value from dropdown
 	 */
 	@Then("^I select \"(.*?)\" option by (.+) from dropdown having (.+) \"(.*?)\"$")
-	public void select_option_from_dropdown(String option, String optionValue, String accessName, String accessValue)
+	public void select_option_from_dropdown(String optionValue, String optionBy, String accessName, String accessValue)
 			throws Exception {
 		misc_Obj.validateLocator(accessName);
-		misc_Obj.validateOptionBy(optionValue);
-		input_Obj.selectOptionFromDropdown(accessName, accessValue, option, optionValue);
+		misc_Obj.validateOptionBy(optionBy);
+		input_Obj.selectOptionFromDropdown(accessName, accessValue, optionBy, optionValue);
 	}
 
 	/**

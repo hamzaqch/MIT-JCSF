@@ -9,9 +9,10 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
                  dryRun = false,
                  monochrome = true,
-                 plugin = {"pretty", "html:test-output.html", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"},
-                 glue = {"info.steps","info.steps.common"},
-                 features = {"features/TestCase_v1.feature"}
+                 plugin = {"pretty", "html:test-output.html"
+                		 ,"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"},
+                 glue = {"info.steps"},
+                 features = {"features/MainPage.feature"}
                 )
 
 public class TestRunner {

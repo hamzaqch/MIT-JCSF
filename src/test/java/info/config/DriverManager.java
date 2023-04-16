@@ -14,6 +14,7 @@ public class DriverManager {
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions = new ChromeOptions();
 	private static FirefoxOptions ffOptions = new FirefoxOptions();
+	private final Browser dbrowser = Browser.CHROME;
 	
 	private static final Thread CLOSE_THREAD = new Thread() {
 		@Override
@@ -67,7 +68,7 @@ public class DriverManager {
 		driver.manage().window().maximize();
 		setWebDriver(driver);
 		Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
-		return getDriver();
+		return driver;
 	}
 	
 	/**
@@ -75,7 +76,11 @@ public class DriverManager {
 	 * @return WebDriver
 	 */
 	public WebDriver getDriver() {
-		return thread_driver_instance.get();
+		if (thread_driver_instance.get() != null) {
+            return thread_driver_instance.get();
+        } else {
+            return getDefaultDriver();
+        }
 	}
 	
 	private static void setWebDriver(WebDriver driver) {
@@ -99,4 +104,12 @@ public class DriverManager {
 			break;
 		}
 	}
+	
+	 public WebDriver getDefaultDriver() {
+		 if (thread_driver_instance.get() != null) {
+	            return thread_driver_instance.get();
+	        }
+		 driver = selectDriver(dbrowser, false);
+		return getDriver();
+	 }
 }

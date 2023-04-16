@@ -137,7 +137,7 @@ public class AssertionSteps extends AbstractPage {
 	@Then("^option \"(.*?)\" by (.+) from dropdown having (.+) \"(.*?)\" should be (selected|unselected)$")
 	public void is_option_from_dropdown_selected(String option, String optionValue, String accessName,
 			String accessValue, String elementState) throws Exception {
-		misc_Obj.validateLocator(accessValue);
+		misc_Obj.validateLocator(accessName);
 		boolean flag = elementState.equals("selected");
 		assertion_Obj.isOptionFromDropdownSelected(accessName, accessValue, option, optionValue, flag);
 	}

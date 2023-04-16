@@ -10,7 +10,7 @@ public class NavigationSteps extends AbstractPage {
 	 * 
 	 * @param link : String : url
 	 */
-	@Then("I navigate to {string}")
+	@Then("^I navigate to \"([^\"]*)\"$")
 	public void navigate_to(String link) {
 		navigate_Obj.navigateTo(link);
 	}
