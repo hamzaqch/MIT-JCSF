@@ -7,9 +7,12 @@ import io.cucumber.java.en.Then;
 
 public class ScreenShotSteps extends AbstractPage {
 
-	 @Then("^I take screenshot$")
-	    public void take_screenshot() throws IOException {
-		 screenShot_Obj.takeScreenShot();
-	    }
-	
+	/**
+	 * Step to take Screen shot
+	 */
+	@Then("^I take screenshot$")
+	public void take_screenshot() throws IOException {
+		screenShot_Obj.takeScreenShot();
+	}
+
 }
