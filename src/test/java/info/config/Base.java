@@ -6,7 +6,7 @@ public interface Base {
 
 	SelectElementByType selectElementByType = new SelectElementByType(); 
 	AssertionMethods assertion_Obj = new AssertionMethods();
-	ClickElementsMethods clickElements_Obj = new ClickElementsMethods();
+	ClickElementsMethods click_Obj = new ClickElementsMethods();
 	ConfigurationMethods config_Obj = new ConfigurationMethods();
 	InputMethods input_Obj = new InputMethods();
 	JavascriptHandlingMethods javaScriptHandling_Obj = new JavascriptHandlingMethods();
