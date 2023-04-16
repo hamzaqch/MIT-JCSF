@@ -38,6 +38,25 @@ public class InputMethods extends AbstractPage implements Base {
 				.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessValue)));
 		getDriver().findElement(selectElementByType.getElementByType(accessType, accessValue)).clear();
 	}
+	
+	/**
+     * Method to select option from dropdown list
+     *
+     * @param accessType : String : Locator type (id, name, class, xpath, css)
+     * @param option     : String : Option to select
+     * @param accessName : String : Locator value
+     */
+    public void selectOptionFromDropdown(String accessType, String accessValue, String optionBy, String option) {
+        dropdown = getDriverWait().waitShort().until(ExpectedConditions.presenceOfElementLocated(selectElementByType.getElementByType(accessType, accessValue)));
+        selectList = new Select(dropdown);
+
+        if (optionBy.equals("selectByIndex"))
+            selectList.selectByIndex(Integer.parseInt(option) - 1);
+        else if (optionBy.equals("value"))
+            selectList.selectByValue(option);
+        else if (optionBy.equals("text"))
+            selectList.selectByVisibleText(option);
+    }
 
 	/**
 	 * Method to select element from Dropdown by type
