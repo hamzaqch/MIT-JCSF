@@ -1,0 +1,161 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>selenium-cucumber-java</groupId>
+    <artifactId>selenium-cucumber-java</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- These are the Cucumber dependencies -->
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.2</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>cucumber-java</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>4.8.1</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>cucumber-junit</artifactId>
+            <groupId>io.cucumber</groupId>
+            <version>4.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.7.1</version>
+        </dependency>
+
+        <!-- These are the junit dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>selenium-java</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <version>3.141.59</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>ngwebdriver</artifactId>
+            <groupId>com.paulhammant</groupId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>extentreports-cucumber4-adapter</artifactId>
+            <groupId>com.aventstack</groupId>
+            <version>1.2.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>cucumber-java</artifactId>
+                    <groupId>io.cucumber</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cucumber-core</artifactId>
+                    <groupId>io.cucumber</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- These are the Allure Reporting dependencies -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber4-jvm</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!--Logger -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version> <!-- Use the latest version here -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.0</version> <!-- Use the latest or required version -->
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+
+            </plugin>
+
+            <!-- These are the Allure Reporting plugins -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>1.9.22</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.9</version>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <reportVersion>2.3.5</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
